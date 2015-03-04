@@ -16,15 +16,15 @@ RUN apt-get install -y git-core ssh wget
 
 # download & install boost
 RUN mkdir /home/iotivity
-RUN cd /home/iotivity
 RUN wget http://sourceforge.net/projects/boost/files/boost/1.55.0/boost_1_55_0.tar.gz/download
-RUN tar xzvf boost_1_55_0.tar.gz
-RUN ./bootstrap.sh --with-libraries=system,filesystem,date_time,thread,regex,log,iostreams,program_options --prefix=/usr/local
+RUN mv download /home/iotivity/boost_1_55_0.tar.gz
+RUN cd /home/iotivity && tar xzvf /home/iotivity/boost_1_55_0.tar.gz
+RUN cd /home/iotivity/boost_1_55_0 && ./bootstrap.sh --with-libraries=system,filesystem,date_time,thread,regex,log,iostreams,program_options --prefix=/usr/local
 
 RUN apt-get update
 RUN apt-get install -y python-dev autotools-dev libicu-dev essential libbz2-dev wget
 
-RUN ./b2 install
+RUN cd /home/iotivity/boost_1_55_0 && ./b2 install
 RUN sh -c 'echo '/usr/local/lib' >> /etc/ld.so.conf.d/local.conf'
 RUN ldconfig
 
