@@ -17,7 +17,7 @@ RUN apt-get install -y git-core ssh wget
 # download & install boost
 RUN mkdir /home/iotivity
 RUN cd /home/iotivity
-RUN http://sourceforge.net/projects/boost/files/boost/1.55.0/boost_1_55_0.tar.gz/download
+RUN wget http://sourceforge.net/projects/boost/files/boost/1.55.0/boost_1_55_0.tar.gz/download
 RUN tar xzvf boost_1_55_0.tar.gz
 RUN ./bootstrap.sh --with-libraries=system,filesystem,date_time,thread,regex,log,iostreams,program_options --prefix=/usr/local
 
